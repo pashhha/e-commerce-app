@@ -1,13 +1,12 @@
 package com.pavils.ecommerce.customer;
 
-import com.pavils.ecommerce.exceptions.CustomerNotFoundException;
+import com.pavils.ecommerce.exception.CustomerNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -54,7 +53,7 @@ public class CustomerService {
         return customers
                 .stream()
                 .map(mapper::toCustomerResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Boolean existsById(String customerId) {

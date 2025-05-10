@@ -1,4 +1,4 @@
-package com.pavils.ecommerce.exceptions;
+package com.pavils.ecommerce.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

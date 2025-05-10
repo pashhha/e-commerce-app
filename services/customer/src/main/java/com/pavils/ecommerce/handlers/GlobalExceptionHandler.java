@@ -1,6 +1,6 @@
 package com.pavils.ecommerce.handlers;
 
-import com.pavils.ecommerce.exceptions.CustomerNotFoundException;
+import com.pavils.ecommerce.exception.CustomerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
