@@ -1,4 +1,4 @@
-package com.pavils.product;
+package com.pavils.ecommerce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
