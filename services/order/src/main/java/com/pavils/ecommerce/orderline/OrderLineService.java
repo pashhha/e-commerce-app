@@ -4,6 +4,8 @@ package com.pavils.ecommerce.orderline;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class OrderLineService {
@@ -13,5 +15,12 @@ public class OrderLineService {
 
     public void saveOrderLine(OrderLineRequest orderLineRequest) {
         repository.save(mapper.toOrderLine(orderLineRequest));
+    }
+
+    public List<OrderLineResponse> findByOrderId(Integer orderId) {
+        return repository.findByOrderId(orderId)
+                .stream()
+                .map(mapper::toOrderLineResponse)
+                .toList();
     }
 }

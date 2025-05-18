@@ -29,7 +29,7 @@ public class ProductClient {
                 };
 
         ResponseEntity<List<PurchaseResponse>> responseEntity = restTemplate.exchange(
-                productUrl + "/purchse",
+                productUrl + "/purchase",
                 HttpMethod.POST,
                 requestEntity,
                 responseType
