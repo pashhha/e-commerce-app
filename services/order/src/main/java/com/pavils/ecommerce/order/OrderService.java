@@ -6,6 +6,8 @@ import com.pavils.ecommerce.kafka.OrderConfirmation;
 import com.pavils.ecommerce.kafka.OrderProducer;
 import com.pavils.ecommerce.orderline.OrderLineRequest;
 import com.pavils.ecommerce.orderline.OrderLineService;
+import com.pavils.ecommerce.payment.PaymentClient;
+import com.pavils.ecommerce.payment.PaymentRequest;
 import com.pavils.ecommerce.product.ProductClient;
 import com.pavils.ecommerce.product.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,6 +27,7 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createOrder(@Valid OrderRequest request) {
 
@@ -50,7 +53,15 @@ public class OrderService {
             );
         }
 
-        //todo start payment process
+        var paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+
+        paymentClient.requestOrderPayment(paymentRequest);
 
         //send the order confirmation --> notifications_ms (Kafka)
         orderProducer.sendOrderConfirmation(
