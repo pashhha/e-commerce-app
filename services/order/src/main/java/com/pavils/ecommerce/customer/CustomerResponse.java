@@ -1,7 +1,7 @@
 package com.pavils.ecommerce.customer;
 
 public record CustomerResponse(
-        Integer id,
+        String id,
         String firstname,
         String lastname,
         String email

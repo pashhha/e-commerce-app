@@ -15,8 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
 
-    ProductRepository productRepository;
-    ProductMapper mapper;
+    private final ProductRepository productRepository;
+    private final ProductMapper mapper;
 
     public Integer createProduct(@Valid ProductRequest request) {
         var product = mapper.toProduct(request);

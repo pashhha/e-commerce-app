@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       username: pavils
-      password: 0102
+      password: pavils
       host: localhost
       port: 27017
       database: customer

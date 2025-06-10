@@ -10,24 +10,21 @@ spring:
           predicates:
             - Path=/api/v1/customers/**
         - id: order-service
-          uri: lb:http//ORDER-SERVICE
+          uri: lb://ORDER-SERVICE
           predicates:
             - Path=/api/v1/orders/**
         - id: order-lines-service
-          uri: lb:http//ORDER-SERVICE
+          uri: lb://ORDER-SERVICE
           predicates:
             - Path=/api/v1/orders-lines/**
         - id: product-service
-          uri: lb:http//PRODUCT-SERVICE
+          uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/products/**
         - id: payment-service
-          uri: lb:http//PAYMENT-SERVICE
+          uri: lb://PAYMENT-SERVICE
           predicates:
             - Path=/api/v1/payments/**
 server:
   port: 8222
-logging:
-  level:
-    root: DEBUG
 
