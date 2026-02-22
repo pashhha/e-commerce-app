@@ -36,11 +36,11 @@ public class CustomerService {
         }
 
         if (StringUtils.isNotBlank(request.lastname())) {
-            customer.setFirstname(request.lastname());
+            customer.setLastname(request.lastname());
         }
 
         if (StringUtils.isNotBlank(request.email())) {
-            customer.setFirstname(request.email());
+            customer.setEmail(request.email());
         }
 
         if (request.address() != null) {

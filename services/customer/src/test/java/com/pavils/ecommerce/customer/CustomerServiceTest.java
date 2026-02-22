@@ -85,9 +85,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void updateCustomer_NonBlankLastname_SetsFirstnameDueToBug() {
-        // KNOWN BUG: mergeCustomer calls customer.setFirstname(request.lastname()) instead of
-        // customer.setLastname(request.lastname()). Lastname update overwrites firstname.
+    void updateCustomer_NonBlankLastname_UpdatesLastname() {
         Customer existing = Customer.builder()
                 .id("cust-1").firstname("OldFirst").lastname("OldLast").email("old@example.com").build();
         CustomerRequest request = new CustomerRequest("cust-1", null, "NewLast", null, null);
@@ -98,16 +96,12 @@ class CustomerServiceTest {
 
         verify(repository).save(customerCaptor.capture());
         Customer saved = customerCaptor.getValue();
-        // Bug: setFirstname is called with the lastname value
-        assertThat(saved.getFirstname()).isEqualTo("NewLast");
-        // lastname is unchanged due to the bug
-        assertThat(saved.getLastname()).isEqualTo("OldLast");
+        assertThat(saved.getFirstname()).isEqualTo("OldFirst");
+        assertThat(saved.getLastname()).isEqualTo("NewLast");
     }
 
     @Test
-    void updateCustomer_NonBlankEmail_SetsFirstnameDueToBug() {
-        // KNOWN BUG: mergeCustomer calls customer.setFirstname(request.email()) instead of
-        // customer.setEmail(request.email()). Email update overwrites firstname.
+    void updateCustomer_NonBlankEmail_UpdatesEmail() {
         Customer existing = Customer.builder()
                 .id("cust-1").firstname("OldFirst").lastname("OldLast").email("old@example.com").build();
         CustomerRequest request = new CustomerRequest("cust-1", null, null, "new@example.com", null);
@@ -118,10 +112,8 @@ class CustomerServiceTest {
 
         verify(repository).save(customerCaptor.capture());
         Customer saved = customerCaptor.getValue();
-        // Bug: setFirstname is called with the email value
-        assertThat(saved.getFirstname()).isEqualTo("new@example.com");
-        // email is unchanged due to the bug
-        assertThat(saved.getEmail()).isEqualTo("old@example.com");
+        assertThat(saved.getFirstname()).isEqualTo("OldFirst");
+        assertThat(saved.getEmail()).isEqualTo("new@example.com");
     }
 
     @Test
