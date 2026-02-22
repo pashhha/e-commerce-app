@@ -25,8 +25,6 @@ public class ProductController {
     public ResponseEntity<List<ProductPurchaseResponse>> purchaseProducts(
             @RequestBody List<ProductPurchaseRequest> request
     ) {
-       service.purchaseProducts(request);
-
         return ResponseEntity.ok(service.purchaseProducts(request));
     }
 

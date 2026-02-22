@@ -83,9 +83,7 @@ class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1));
 
-        // Documents Bug #3: controller calls service.purchaseProducts(request) twice;
-        // the first result is silently discarded and only the second is returned.
-        verify(service, times(2)).purchaseProducts(any());
+        verify(service, times(1)).purchaseProducts(any());
     }
 
     @Test

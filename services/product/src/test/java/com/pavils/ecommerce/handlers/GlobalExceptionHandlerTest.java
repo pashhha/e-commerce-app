@@ -19,27 +19,23 @@ class GlobalExceptionHandlerTest {
     private final GlobalExceptionHandler handler = new GlobalExceptionHandler();
 
     @Test
-    void handleProductPurchaseException_Returns400WithNullBody() {
-        // Documents Bug #2: ProductPurchaseException does not call super(msg),
-        // so getMessage() returns null and the response body is null.
+    void handleProductPurchaseException_Returns400WithMessageBody() {
         ProductPurchaseException ex = new ProductPurchaseException("some message");
 
         ResponseEntity<String> response = handler.handle(ex);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(response.getBody()).isNull();
+        assertThat(response.getBody()).isEqualTo("some message");
     }
 
     @Test
-    void handleEntityNotFoundException_Returns400WithNullBody() {
-        // Documents Bug #1: EntityNotFoundException does not call super(msg),
-        // so getMessage() returns null and the response body is null.
+    void handleEntityNotFoundException_Returns400WithMessageBody() {
         EntityNotFoundException ex = new EntityNotFoundException("some message");
 
         ResponseEntity<String> response = handler.handle(ex);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(response.getBody()).isNull();
+        assertThat(response.getBody()).isEqualTo("some message");
     }
 
     @Test

@@ -158,7 +158,6 @@ class ProductServiceTest {
 
     @Test
     void findById_NonExistent_ThrowsEntityNotFoundException() {
-        // Bug #1: EntityNotFoundException does not call super(msg), so getMessage() returns null
         when(repository.findById(99)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.findById(99))
